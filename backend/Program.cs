@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EquipamentosMedicosApi.Data;
+using EquipamentosMedicosApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +66,9 @@ builder.Services.AddControllers();
 
 // --- Swagger/OpenAPI ---
 builder.Services.AddOpenApi();
+
+// --- Serviços ---
+builder.Services.AddScoped<ProductService>();
 
 var app = builder.Build();
 

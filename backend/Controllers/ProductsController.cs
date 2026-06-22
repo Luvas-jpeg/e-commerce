@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using EquipamentosMedicosApi.Data;
 using EquipamentosMedicosApi.DTOs;
 using EquipamentosMedicosApi.Models;
+using EquipamentosMedicosApi.Services;
 
 namespace EquipamentosMedicosApi.Controllers
 {
@@ -11,11 +12,11 @@ namespace EquipamentosMedicosApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ProductService _productService;
 
-        public ProductsController(AppDbContext context)
+        public ProductsController(ProductService productService)
         {
-            _context = context;
+            _productService = productService;
         }
 
         /// <summary>Lista todos os produtos (com filtro opcional por tipo)</summary>
