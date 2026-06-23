@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EquipamentosMedicosApi.Data;
 using EquipamentosMedicosApi.Services;
+using EquipamentosMedicosApi.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,8 @@ builder.Services.AddOpenApi();
 
 // --- Serviços ---
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<AuthService>();
 
 var app = builder.Build();
 
