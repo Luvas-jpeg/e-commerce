@@ -1,0 +1,53 @@
+# .NET
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.rsuser
+*.sln.docstates
+
+# Logs
+*.log
+logs/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+.cache/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Backend config with real secrets
+backend/appsettings.Development.json
+backend/appsettings.Local.json
+backend/appsettings.Production.json
+
+# Databases / local files
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.dump
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# Docker local override
+docker-compose.override.yml
