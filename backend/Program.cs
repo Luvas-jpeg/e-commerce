@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EquipamentosMedicosApi.Data;
 using EquipamentosMedicosApi.Services;
-using EquipamentosMedicosApi.Service;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,12 +72,17 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<InventoryService>();
+builder.Services.AddScoped<PromoCodeService>();
+builder.Services.AddScoped<EnrollmentService>();
+builder.Services.AddScoped<OrderService>();
 
 var app = builder.Build();
 
-// --- Aplicar migrations e seed automaticamente ---
-using (var scope = app.Services.CreateScope())
+// --- Aplicar migrations automaticamente apenas em desenvolvimento ---
+if (app.Environment.IsDevelopment())
 {
+    using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
 }

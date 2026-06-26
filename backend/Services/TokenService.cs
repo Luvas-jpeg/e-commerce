@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using EquipamentosMedicosApi.Models;
 
-namespace EquipamentosMedicosApi.Service;
+namespace EquipamentosMedicosApi.Services;
 
 public class TokenService
 {

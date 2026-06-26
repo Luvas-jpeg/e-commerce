@@ -3,7 +3,7 @@ using EquipamentosMedicosApi.Data;
 using EquipamentosMedicosApi.DTOs;
 using EquipamentosMedicosApi.Models;
 
-namespace EquipamentosMedicosApi.Service;
+namespace EquipamentosMedicosApi.Services;
 
 public class AuthService
 {

@@ -1,4 +1,4 @@
-namespace EquipamentosMedicosApi.Service;
+namespace EquipamentosMedicosApi.Services;
 
 public class AuthServiceResult<T>
 {

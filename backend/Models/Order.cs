@@ -6,7 +6,7 @@ namespace EquipamentosMedicosApi.Models
         public int Id { get; set; }
         public int UsuarioId { get; set; }
         public DateTime DataPedido { get; set; } = DateTime.UtcNow;
-        public string Status { get; set; } = "Pedente";
+        public string Status { get; set; } = "Pendente";
         public decimal Total { get; set; }
         public decimal ValorFrete { get; set; }
         public string PaymentMethod { get; set; } = "credit";

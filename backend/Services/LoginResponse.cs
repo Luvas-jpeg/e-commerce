@@ -1,6 +1,6 @@
 using EquipamentosMedicosApi.DTOs;
 
-namespace EquipamentosMedicosApi.Service;
+namespace EquipamentosMedicosApi.Services;
 
 public class LoginResponse
 {
