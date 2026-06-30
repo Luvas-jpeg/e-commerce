@@ -76,6 +76,7 @@ builder.Services.AddScoped<InventoryService>();
 builder.Services.AddScoped<PromoCodeService>();
 builder.Services.AddScoped<EnrollmentService>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<StudentService>();
 
 var app = builder.Build();
 
