@@ -1,0 +1,32 @@
+export interface User {
+    id: number;
+    nome: string;
+    email: string;
+    cpf: string;
+    phone: string;
+    street: string;
+    number: string;
+    neighborhood: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    role: "Cliente" | "Admin";
+}
+
+export interface LoginRequest {
+    email:string;
+    senha: string;
+}
+
+export interface RegisterRequest{
+    nome:string;
+    email: string;
+    senha: string;
+    cpf: string;
+    phone: string;
+}
+
+export interface AuthResponse {
+    token: string;
+    user: User
+}
