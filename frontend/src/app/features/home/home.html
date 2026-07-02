@@ -61,10 +61,16 @@
       <div class="state">Nenhum item encontrado.</div>
     } @else {
       <div class="product-grid">
-        @for (product of filteredProducts(); track product.id) {
+        @for (product of filteredProducts(); track product.id; let index = $index) {
           <article class="product-card">
             <div class="product-card__media">
-              <img [src]="product.image" [alt]="product.nome" loading="lazy" />
+              <img
+                [src]="imageUrl(product)"
+                [alt]="product.nome"
+                loading="eager"
+                decoding="async"
+                (error)="setFallbackImage($event)"
+              />
 
               <span class="product-card__badge">
                 {{ product.tipoProduto === 'course' ? 'Curso' : 'Equipamento' }}
@@ -73,14 +79,14 @@
 
             <div class="product-card__body">
               <div class="product-card__meta">
-                <span>{{ product.category }}</span>
+                <span>{{ product.category || 'Saúde' }}</span>
                 <span>
                   {{ product.tipoProduto === 'course' ? product.estoque + ' vagas' : product.estoque + ' em estoque' }}
                 </span>
               </div>
 
               <h3>{{ product.nome }}</h3>
-              <p>{{ product.description }}</p>
+              <p>{{ product.description || 'Item disponível para compra no catálogo MediShop.' }}</p>
 
               @if (product.tipoProduto === 'course') {
                 <div class="course-info">
@@ -91,10 +97,14 @@
               }
 
               <div class="product-card__footer">
-                <strong>{{ product.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
+                <strong>{{ formatPrice(product.preco) }}</strong>
 
-                <button type="button" (click)="addToCart(product)">
-                  Adicionar
+                <button
+                  type="button"
+                  [disabled]="!canAddToCart(product)"
+                  (click)="addToCart(product)"
+                >
+                  {{ canAddToCart(product) ? 'Adicionar' : 'Indisponível' }}
                 </button>
               </div>
             </div>

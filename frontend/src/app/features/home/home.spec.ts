@@ -1,15 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { registerLocaleData } from '@angular/common';
-import localePt from '@angular/common/locales/pt'
 
 import { Home } from './home';
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
 import { Product } from '../../core/models/product.models';
 
-registerLocaleData(localePt)
 describe('Home', () => {
   let fixture: ComponentFixture<Home>;
   let component: Home;
@@ -17,16 +14,16 @@ describe('Home', () => {
   const products: Product[] = [
     {
       id: 1,
-      nome: 'Estetoscópio Profissional',
+      nome: 'Estetoscopio Profissional',
       preco: 289.9,
       tipoProduto: 'equipment',
       estoque: 10,
-      description: 'Equipamento médico para ausculta.',
+      description: 'Equipamento medico para ausculta.',
       image: 'https://example.com/stethoscope.jpg',
-      category: 'Diagnóstico',
+      category: 'Diagnostico',
       date: '',
       location: '',
-      instructor: ''
+      instructor: '',
     },
     {
       id: 2,
@@ -38,17 +35,17 @@ describe('Home', () => {
       image: 'https://example.com/course.jpg',
       category: 'Treinamento',
       date: '10/08/2026',
-      location: 'São Paulo - SP',
-      instructor: 'Dra. Ana Costa'
-    }
+      location: 'Sao Paulo - SP',
+      instructor: 'Dra. Ana Costa',
+    },
   ];
 
   const productServiceMock = {
-    getAll: vi.fn()
+    getAll: vi.fn(),
   };
 
   const cartServiceMock = {
-    add: vi.fn()
+    add: vi.fn(),
   };
 
   beforeEach(async () => {
@@ -58,8 +55,8 @@ describe('Home', () => {
       imports: [Home],
       providers: [
         { provide: ProductService, useValue: productServiceMock },
-        { provide: CartService, useValue: cartServiceMock }
-      ]
+        { provide: CartService, useValue: cartServiceMock },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Home);
@@ -109,9 +106,21 @@ describe('Home', () => {
     expect(cartServiceMock.add).toHaveBeenCalledWith(products[0], 1);
   });
 
+  it('should not add product without stock to cart', () => {
+    const productWithoutStock = { ...products[0], estoque: 0 };
+
+    component.addToCart(productWithoutStock);
+
+    expect(cartServiceMock.add).not.toHaveBeenCalled();
+  });
+
+  it('should format prices in BRL', () => {
+    expect(component.formatPrice(289.9)).toContain('289,90');
+  });
+
   it('should set error when products cannot be loaded', () => {
     productServiceMock.getAll.mockReturnValue(
-      throwError(() => new Error('API error'))
+      throwError(() => new Error('API error')),
     );
 
     const errorFixture = TestBed.createComponent(Home);
@@ -121,6 +130,6 @@ describe('Home', () => {
 
     expect(errorComponent.products()).toEqual([]);
     expect(errorComponent.loading()).toBe(false);
-    expect(errorComponent.error()).toBe('Não foi possível carregar os produtos.');
+    expect(errorComponent.error()).toBe('Nao foi possivel carregar os produtos.');
   });
 });
