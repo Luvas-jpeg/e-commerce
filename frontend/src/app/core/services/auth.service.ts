@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { AuthResponse, LoginRequest, RegisterRequest, User } from '../models/auth.models';
+import { AuthResponse, LoginRequest, RegisterRequest, UpdateProfileRequest, User } from '../models/auth.models';
 
 const API_URL = 'http://localhost:5278/api';
 
@@ -27,6 +27,12 @@ export class AuthService {
     );
   }
 
+  updateProfile(request: UpdateProfileRequest): Observable<User> {
+    return this.http.put<User>(`${API_URL}/Auth/perfil`, request).pipe(
+      tap(user => this.setUser(user))
+    );
+  }
+
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.userKey);
@@ -47,8 +53,12 @@ export class AuthService {
 
   private setSession(response: AuthResponse): void {
     localStorage.setItem(this.tokenKey, response.token);
-    localStorage.setItem(this.userKey, JSON.stringify(response.user));
-    this.user.set(response.user);
+    this.setUser(response.user);
+  }
+
+  private setUser(user: User): void {
+    localStorage.setItem(this.userKey, JSON.stringify(user));
+    this.user.set(user);
   }
 
   private getStoredUser(): User | null {

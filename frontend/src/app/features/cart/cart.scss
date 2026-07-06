@@ -41,7 +41,7 @@
 .section-label {
   display: inline-block;
   margin-bottom: 12px;
-  color: #2dd4bf;
+  color: var(--color-accent);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -90,7 +90,7 @@
 .primary-link,
 .checkout-link {
   padding: 0 18px;
-  background: #0f766e;
+  background: var(--color-primary);
   color: #fff;
 }
 

@@ -6,6 +6,7 @@ export interface User {
     phone: string;
     street: string;
     number: string;
+    complement?: string;
     neighborhood: string;
     city: string;
     state: string;
@@ -24,6 +25,20 @@ export interface RegisterRequest{
     senha: string;
     cpf: string;
     phone: string;
+}
+
+export interface UpdateProfileRequest {
+    nome: string;
+    email: string;
+    cpf: string;
+    phone: string;
+    street: string;
+    number: string;
+    complement: string;
+    neighborhood: string;
+    city: string;
+    state: string;
+    zipCode: string;
 }
 
 export interface AuthResponse {

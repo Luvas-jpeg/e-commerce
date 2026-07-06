@@ -25,7 +25,7 @@
 .section-label {
   display: inline-block;
   margin-bottom: 12px;
-  color: #2dd4bf;
+  color: var(--color-accent);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -106,7 +106,7 @@
 }
 
 .filters button.active {
-  background: #0f766e;
+  background: var(--color-primary);
   color: #fff;
 }
 
@@ -212,7 +212,7 @@
 
 .product-card__footer button {
   padding: 0 14px;
-  background: #0f766e;
+  background: var(--color-primary);
   color: #fff;
 }
 
